@@ -6,7 +6,7 @@ local GLOBAL_WORLD_MATERIAL = Material( "editor/wireframe" )
 
 
 local function stringToVector( strVector )
-  strTrimmed = string.Trim( strVector, "(" )
+  local strTrimmed = string.Trim( strVector, "(" )
   strTrimmed = string.Trim( strTrimmed, ")" )
 
   local splitStr = string.Explode( ") (", strTrimmed )
