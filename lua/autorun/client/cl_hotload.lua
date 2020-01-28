@@ -4,6 +4,7 @@ local GLOBAL_MESHES = {}
 GLOBAL_WORLD = {}
 local GLOBAL_WORLD_MATERIAL = Material( "editor/wireframe" )
 
+
 local function stringToVector( strVector )
   local strTrimmed = string.Trim( strVector, "(" )
   strTrimmed = string.Trim( strTrimmed, ")" )
@@ -53,7 +54,6 @@ local function processSolid( solidTbl )
 end
 
 
-
 local function processWorld( worldTbl )
   local numSolids = 0
   local world = {}
@@ -70,11 +70,9 @@ local function processWorld( worldTbl )
 end
 
 local function solidToMeshTriangle( solidTbl )
-
   local triangleSets = {}
 
   for key, value in pairs( solidTbl ) do
-
     local triangle = {}
 
     for i=1, #value.plane do
@@ -82,14 +80,12 @@ local function solidToMeshTriangle( solidTbl )
     end
 
     table.insert( triangleSets, triangle )
-
   end
 
   return triangleSets
 end
 
 local function renderBuildObject( triangleSet )
-
   for key, verts in pairs( triangleSet ) do
     local obj = Mesh()
     obj:BuildFromTriangles( verts )
@@ -120,15 +116,11 @@ concommand.Add( "hlmap_debug", function( ply, cmd, args )
 
 end )
 
-----
 
-
-
-local mat = Material( "editor/wireframe" )
 
 hook.Add( "PostDrawOpaqueRenderables", "vmf-hotload-draw", function()
   for key, obj in pairs( GLOBAL_MESHES ) do
-    render.SetMaterial( mat )
+    render.SetMaterial( GLOBAL_WORLD_MATERIAL )
     obj:Draw()
   end
 end )
